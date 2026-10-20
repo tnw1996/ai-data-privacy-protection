@@ -1,4 +1,3 @@
-
 import pandas as pd
 
 def mask_email(email):
@@ -7,7 +6,6 @@ def mask_email(email):
 
     name, domain = str(email).split("@", 1)
     return name[0] + "***@" + domain
-
 
 def mask_phone(phone):
     if pd.isna(phone):
@@ -20,18 +18,14 @@ def mask_phone(phone):
 
     return "*" * (len(phone) - 4) + phone[-4:]
 
-
-# Read the sample CSV file
 df = pd.read_csv("sample_data.csv")
 
-# Mask sensitive columns
 if "Email" in df.columns:
     df["Email"] = df["Email"].apply(mask_email)
 
 if "Phone" in df.columns:
     df["Phone"] = df["Phone"].apply(mask_phone)
 
-# Save the masked data in a new file
 df.to_csv("masked_data.csv", index=False)
 
 print("Masked dataset:")
