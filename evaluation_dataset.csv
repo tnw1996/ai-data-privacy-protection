@@ -1,0 +1,31 @@
+text,expected_entities,expected_action
+Contact John Smith at john@example.com,PERSON;EMAIL_ADDRESS,ANONYMIZE
+Call me at 212-555-0101,PHONE_NUMBER,MASK
+My name is Alice Brown,PERSON,ANONYMIZE
+The meeting is in the main office,NONE,ALLOW
+Card number 4111111111111111,CREDIT_CARD,BLOCK
+Email support@example.com for help,EMAIL_ADDRESS,ANONYMIZE
+The delivery arrives tomorrow,NONE,ALLOW
+Contact Mary Jones at 415-555-0132,PERSON;PHONE_NUMBER,ANONYMIZE_AND_MASK
+"Please send the report to David Lee, david.lee@example.org",PERSON;EMAIL_ADDRESS,ANONYMIZE
+Reach the support team at 800-555-0199,PHONE_NUMBER,MASK
+This document contains no contact details,NONE,ALLOW
+The account holder is Robert Green,PERSON,ANONYMIZE
+Write to billing@example.net about the invoice,EMAIL_ADDRESS,ANONYMIZE
+Customer phone: (202) 555-0147,PHONE_NUMBER,MASK
+My colleague Sarah Miller will attend,PERSON,ANONYMIZE
+The package contains three notebooks,NONE,ALLOW
+Contact Emma Wilson at emma.wilson@example.com or 303-555-0128,PERSON;EMAIL_ADDRESS;PHONE_NUMBER,ANONYMIZE_AND_MASK
+Please review reference ID AB-2048,NONE,ALLOW
+Card details: 5555555555554444,CREDIT_CARD,BLOCK
+The appointment is scheduled for next Monday,NONE,ALLOW
+Name: Michael Taylor; email: michael.taylor@example.org,PERSON;EMAIL_ADDRESS,ANONYMIZE
+Call the office on 617-555-0184,PHONE_NUMBER,MASK
+A person named Jordan lives near the city library,PERSON,ANONYMIZE
+Please check the attached quarterly summary,NONE,ALLOW
+Contact Olivia Martin at olivia.martin@example.net,PERSON;EMAIL_ADDRESS,ANONYMIZE
+Payment card number 4000000000000002,CREDIT_CARD,BLOCK
+Send the minutes to the project group,NONE,ALLOW
+"The caller is Daniel White, number 212-555-0166",PERSON;PHONE_NUMBER,ANONYMIZE_AND_MASK
+Email: not-an-email and phone: unavailable,NONE,ALLOW
+Contact Priya Shah at priya.shah@example.com,PERSON;EMAIL_ADDRESS,ANONYMIZE
