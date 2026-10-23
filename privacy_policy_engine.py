@@ -1,3 +1,4 @@
+
 import pandas as pd
 from pathlib import Path
 from presidio_analyzer import AnalyzerEngine
@@ -64,6 +65,7 @@ def apply_policy(value):
     results = [
         result for result in results
         if result.score >= MIN_CONFIDENCE
+        or result.entity_type == "PHONE_NUMBER"
     ]
 
     if not results:
@@ -75,8 +77,7 @@ def apply_policy(value):
             PRIVACY_POLICIES.get(
                 result.entity_type, "REVIEW"
             ),
-            round(result.score, 2),
-            value[result.start:result.end]
+            round(result.score, 2)
         )
         for result in results
     ]
@@ -86,7 +87,10 @@ def apply_policy(value):
             result.entity_type, "REVIEW"
         )
 
-        if action in ("BLOCK", "REVIEW"):
+        if action == "BLOCK":
+            return None, actions, True
+
+        if action == "REVIEW":
             return None, actions, True
 
     protected_value = value
@@ -98,6 +102,7 @@ def apply_policy(value):
     ):
         entity = result.entity_type
         action = PRIVACY_POLICIES[entity]
+
         original = value[result.start:result.end]
 
         if action == "ANONYMIZE":
@@ -137,7 +142,7 @@ def main():
 
             all_actions.extend(
                 (entity, action, score)
-                for entity, action, score, detected_value in actions
+                for entity, action, score in actions
             )
 
             if blocked:
@@ -150,10 +155,12 @@ def main():
     print("\n--- Privacy Policy Report ---")
 
     if all_actions:
-        for entity, action in sorted(set(
-            (entity, action)
-            for entity, action, score in all_actions
-        )):
+        for entity, action in sorted(
+            set(
+                (entity, action)
+                for entity, action, score in all_actions
+            )
+        ):
             print(f"{entity}: {action}")
     else:
         print("No PII detected above the confidence threshold.")
@@ -167,7 +174,7 @@ def main():
         for column, row, actions in blocked_items:
             print(f"Column '{column}', row {row}:")
 
-            for entity, action, score, detected_value in actions:
+            for entity, action, score in actions:
                 print(
                     f"  Entity: {entity}; "
                     f"Policy: {action}; "
